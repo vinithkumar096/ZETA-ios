@@ -19,11 +19,7 @@ extension UIStoryboard {
     }
     
     
-    /**
-     Instantiate View Controller from selected storyboard
-     - Returns: View Controller
-     - Parameter name: Instantiate View Controller Name
-     */
+  
     func instantiateViewController<T: UIViewController>(withClass name: T.Type) -> T? {
         return instantiateViewController(withIdentifier: String(describing: name)) as? T
     }
