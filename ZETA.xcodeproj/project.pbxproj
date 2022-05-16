@@ -110,6 +110,7 @@
 		DB11094D2817051D0073E6AC /* ZETA */ = {
 			isa = PBXGroup;
 			children = (
+				E5B98A6C2832FE9E00DFBDA3 /* Model */,
 				DB110984281708D30073E6AC /* Navigations */,
 				DB11097D2817068C0073E6AC /* Screens */,
 				DB110962281705460073E6AC /* Extensions */,
@@ -147,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				DB11097E281706A90073E6AC /* WelcomeScreenVC.swift */,
-				E5B98A6C2832FE9E00DFBDA3 /* Model */,
 				DB110980281708220073E6AC /* CreateAccountVC.swift */,
 				DB110982281708B40073E6AC /* LoginVC.swift */,
 				DB11098A28171FEB0073E6AC /* HomeVC.swift */,
