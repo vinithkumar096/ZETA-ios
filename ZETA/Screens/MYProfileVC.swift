@@ -13,6 +13,9 @@ class MYProfileVC: UIViewController {
     @IBOutlet weak var btnUPdate: UIButton!
     @IBOutlet weak var PaymentInfoClick: UIButton!
     
+    let user = GFunction.user
+    
+    
     @IBAction func btnSignoutClick(_ sender: UIButton) {
         UIApplication.shared.setStart()
     }
@@ -26,7 +29,7 @@ class MYProfileVC: UIViewController {
     @IBAction func updateProfileClick(_ sender: UIButton) {
         let error = self.validation()
         if error == "" {
-            Alert.shared.showAlert(message: "Your Profile has been Updated !!!", completion: nil)
+            self.updateProfile(docID: user?.docId.description ?? "", name: self.txtName.text ?? "", phoneNumber: self.txtPhone.text ?? "")
         }else{
             Alert.shared.showAlert(message: error, completion: nil)
         }
@@ -45,9 +48,36 @@ class MYProfileVC: UIViewController {
         return ""
     }
     
+    func setUpData(){
+        if self.user != nil {
+            self.txtName.text = self.user?.name.description
+            self.txtEmail.text = self.user?.email?.description
+            self.txtPhone.text = self.user?.phone.description
+            self.txtEmail.isUserInteractionEnabled = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.setUpData()
         // Do any additional setup after loading the view.
+    }
+}
+
+
+extension MYProfileVC {
+    func updateProfile(docID: String,name:String,phoneNumber:String) {
+        let ref = AppDelegate.shared.db.collection(zUser).document(docID)
+        ref.updateData([
+            zName : name,
+            zPhone : phoneNumber,
+        ]){ err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+                Alert.shared.showAlert(message: "Your Profile has been Updated !!!", completion: nil)
+            }
+        }
     }
 }
